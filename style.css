@@ -1,146 +1,309 @@
-/* Basic page styling */
+/* 1. CSS VARIABLES */
+
+:root {
+    --primary: #17365d;
+    --accent: #6c63ff;
+    --background: #f4f7fc;
+    --surface: #ffffff;
+    --text: #263238;
+    --border: #dce3ee;
+}
+
+[data-theme="dark"] {
+    --primary: #a8c7ff;
+    --accent: #b4aaff;
+    --background: #111827;
+    --surface: #1f2937;
+    --text: #f3f4f6;
+    --border: #374151;
+}
+
+/* 2. GLOBAL STYLES */
 
 * {
-  box-sizing: border-box;
-  }
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
 
 body {
-margin: 0;
-font-family: Arial, sans-serif;
-font-size: 16px;
-line-height: 1.6;
-color: #222222;
-background-color: #ffffff;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--background);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Header */
-header {
-background-color: #17365d;
-color: #ffffff;
-padding: 20px;
-text-align: center;
+a {
+    color: var(--accent);
+    overflow-wrap: anywhere;
 }
 
-/* Navigation */
-nav ul {
-list-style: none;
-padding: 0;
-display: flex;
-justify-content: center;
-flex-wrap: wrap;
-gap: 20px;
-}
-
-nav a {
-color: #ffffff;
-text-decoration: underline;
-padding: 8px;
-}
-
-nav a:hover {
-text-decoration: none;
-}
-
-/* Keyboard focus */
 a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-textarea:focus-visible {
-outline: 3px solid #ffbf47;
-outline-offset: 4px;
+button:focus-visible {
+    outline: 3px solid #ffbf47;
+    outline-offset: 4px;
 }
 
-/* Skip link */
+/* 3. SKIP LINK */
+
 .skip-link {
-position: absolute;
-top: -100px;
-left: 10px;
-background: #ffffff;
-color: #000000;
-padding: 10px;
-z-index: 100;
+    position: absolute;
+    top: -100px;
+    left: 10px;
+    padding: 10px;
+    color: #000;
+    background: #fff;
+    z-index: 100;
 }
 
 .skip-link:focus {
-top: 10px;
+    top: 10px;
 }
 
-/* Main content */
-main {
-max-width: 900px;
-margin: 30px auto;
-padding: 20px;
+/* 4. HEADER */
+
+header {
+    padding: 30px 20px;
+    text-align: center;
+    color: #fff;
+    background: linear-gradient(135deg, #17365d, #536dfe);
 }
 
-section,
-article {
-margin-bottom: 25px;
+header h1 {
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 3rem);
 }
 
-h2,
-h3 {
-color: #17365d;
-}
+/* 5. NAVIGATION - FLEXBOX */
 
-/* Contact form */
-form {
-max-width: 600px;
-}
-
-form div {
-margin-bottom: 20px;
-}
-
-label {
-display: block;
-font-weight: bold;
-margin-bottom: 5px;
-}
-
-input,
-textarea {
-width: 100%;
-padding: 12px;
-border: 1px solid #555555;
-border-radius: 4px;
-font: inherit;
-}
-
-button {
-padding: 12px 20px;
-background-color: #17365d;
-color: #ffffff;
-border: 2px solid #17365d;
-border-radius: 4px;
-font: inherit;
-cursor: pointer;
-}
-
-button:hover {
-background-color: #ffffff;
-color: #17365d;
-}
-
-/* Footer */
-footer {
-background-color: #eeeeee;
-color: #222222;
-text-align: center;
-padding: 15px;
-margin-top: 30px;
-}
-
-/* Mobile layout */
-@media (max-width: 600px) {
 nav ul {
-flex-direction: column;
-gap: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 0;
+    margin: 25px 0 0;
+    list-style: none;
 }
 
-```
+nav a {
+    display: block;
+    padding: 10px 18px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+nav a:hover,
+nav a[aria-current="page"] {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+nav a:hover {
+    transform: translateY(-2px);
+}
+
+/* 6. MAIN CONTENT */
+
 main {
-    padding: 15px;
+    width: min(100% - 32px, 1100px);
+    margin: 45px auto;
 }
-```
 
+/* 7. GENERAL SECTIONS */
+
+section {
+    padding: clamp(25px, 5vw, 55px);
+    text-align: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: 0 12px 35px rgba(23, 54, 93, 0.08);
+}
+
+section h2 {
+    margin-top: 0;
+    color: var(--primary);
+    font-size: clamp(1.7rem, 4vw, 2.5rem);
+}
+
+section p {
+    max-width: 650px;
+    margin: 12px auto;
+}
+
+/* 8. SECTION LINKS */
+
+section a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 24px;
+    color: #fff;
+    background: var(--accent);
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+section a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(108, 99, 255, 0.25);
+}
+
+/* 9. PROJECTS SECTION */
+
+.projects-section {
+    text-align: center;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: 30px;
+    text-align: left;
+}
+
+.projects-grid .project-card {
+    min-width: 0;
+    padding: 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.projects-grid .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(23, 54, 93, 0.12);
+}
+
+.projects-grid .project-card h3 {
+    margin-top: 0;
+    color: var(--primary);
+    overflow-wrap: anywhere;
+}
+
+.projects-grid .project-card p {
+    margin-bottom: 0;
+    overflow-wrap: anywhere;
+}
+
+/* 10. FOOTER */
+
+footer {
+    padding: 22px 15px;
+    text-align: center;
+    color: var(--text);
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+}
+
+footer p {
+    margin: 0;
+}
+
+/* 11. TABLET RESPONSIVE DESIGN */
+
+@media (max-width: 900px) {
+    main {
+        margin: 30px auto;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+    }
+
+    .projects-grid .project-card {
+        padding: 20px;
+    }
+
+    nav ul {
+        gap: 8px;
+    }
+}
+
+/* 12. MOBILE RESPONSIVE DESIGN */
+
+@media (max-width: 600px) {
+    body {
+        font-size: 15px;
+    }
+
+    header {
+        padding: 24px 12px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    nav a {
+        padding: 8px 16px;
+    }
+
+    main {
+        width: calc(100% - 24px);
+        margin: 20px auto;
+    }
+
+    section {
+        padding: 24px 18px;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .projects-grid .project-card {
+        padding: 20px;
+    }
+}
+
+/* 13. DARK MODE */
+
+[data-theme="dark"] body {
+    color: var(--text);
+    background: var(--background);
+}
+
+[data-theme="dark"] section,
+[data-theme="dark"] footer {
+    color: var(--text);
+    background: var(--surface);
+    border-color: var(--border);
+}
+
+[data-theme="dark"] section h2,
+[data-theme="dark"] .projects-grid .project-card h3 {
+    color: var(--primary);
+}
+
+[data-theme="dark"] .projects-grid .project-card {
+    background: var(--surface);
+    border-color: var(--border);
+}
+
+/* 14. REDUCED MOTION ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
 }
